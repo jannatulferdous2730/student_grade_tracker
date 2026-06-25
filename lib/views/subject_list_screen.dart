@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../controllers/grade_tracker_controller.dart';
-import '../models/subject.dart';
 
 class SubjectListScreen extends StatelessWidget {
   const SubjectListScreen({super.key});

@@ -32,14 +32,12 @@ class AppTheme {
         primary: _lightPrimary,
         secondary: _lightSecondary,
         surface: _lightSurface,
-        background: _lightBackground,
         error: _lightError,
         onPrimary: Colors.white,
         onSecondary: Colors.white,
         onSurface: _lightTextPrimary,
-        onBackground: _lightTextPrimary,
         onError: Colors.white,
-        surfaceVariant: Color(0xFFF1F5F9), // Card highlights
+        surfaceContainerHighest: Color(0xFFF1F5F9), // Card highlights
         onSurfaceVariant: _lightTextSecondary,
         outline: Color(0xFFE2E8F0),
       ),
@@ -66,7 +64,7 @@ class AppTheme {
         type: BottomNavigationBarType.fixed,
         elevation: 10,
       ),
-      cardTheme: CardTheme(
+      cardTheme: CardThemeData(
         color: _lightSurface,
         elevation: 0,
         shape: RoundedRectangleBorder(
@@ -142,14 +140,12 @@ class AppTheme {
         primary: _darkPrimary,
         secondary: _darkSecondary,
         surface: _darkSurface,
-        background: _darkBackground,
         error: _darkError,
         onPrimary: _darkBackground,
         onSecondary: _darkBackground,
         onSurface: _darkTextPrimary,
-        onBackground: _darkTextPrimary,
         onError: _darkBackground,
-        surfaceVariant: Color(0xFF0F172A), // Inside card highlights
+        surfaceContainerHigh: Color(0xFF0F172A), // Inside card highlights
         onSurfaceVariant: _darkTextSecondary,
         outline: Color(0xFF334155),
       ),
@@ -176,7 +172,7 @@ class AppTheme {
         type: BottomNavigationBarType.fixed,
         elevation: 10,
       ),
-      cardTheme: CardTheme(
+      cardTheme: CardThemeData(
         color: _darkSurface,
         elevation: 0,
         shape: RoundedRectangleBorder(
