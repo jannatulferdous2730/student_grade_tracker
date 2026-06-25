@@ -1,18 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'controllers/grade_tracker_controller.dart';
+import 'themes/app_theme.dart';
+import 'views/main_navigation_screen.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => GradeTrackerController(),
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    // Access the controller to listen to theme changes in real time
+    final controller = context.watch<GradeTrackerController>();
+
     return MaterialApp(
       title: 'Student Grade Tracker',
-      theme: ThemeData(colorScheme: .fromSeed(seedColor: Colors.deepPurple)),
+      theme: AppTheme.lightTheme,
+      darkTheme: AppTheme.darkTheme,
+      themeMode: controller.themeMode,
+      home: const MainNavigationScreen(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
