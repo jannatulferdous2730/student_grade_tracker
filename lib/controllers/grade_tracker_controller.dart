@@ -1,4 +1,6 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../models/subject.dart';
 
 class GradeTrackerController extends ChangeNotifier {
@@ -16,6 +18,38 @@ class GradeTrackerController extends ChangeNotifier {
   final markController = TextEditingController();
   final formKey = GlobalKey<FormState>();
 
+  GradeTrackerController() {
+    _loadData();
+  }
+
+  Future<void> _loadData() async {
+    final prefs = await SharedPreferences.getInstance();
+    
+    final isDark = prefs.getBool('isDarkMode');
+    if (isDark != null) {
+      _themeMode = isDark ? ThemeMode.dark : ThemeMode.light;
+    }
+    
+    final subjectsJson = prefs.getString('subjects');
+    if (subjectsJson != null) {
+      final List<dynamic> decoded = jsonDecode(subjectsJson);
+      _subjects.clear();
+      _subjects.addAll(decoded.map((item) => Subject.fromJson(item as Map<String, dynamic>)));
+    }
+    notifyListeners();
+  }
+
+  Future<void> _saveData() async {
+    final prefs = await SharedPreferences.getInstance();
+    final encoded = jsonEncode(_subjects.map((s) => s.toJson()).toList());
+    await prefs.setString('subjects', encoded);
+  }
+
+  Future<void> _saveTheme() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('isDarkMode', isDarkMode);
+  }
+
   // Getters
   List<Subject> get subjects => List.unmodifiable(_subjects);
   int get currentTabIndex => _currentTabIndex;
@@ -31,6 +65,7 @@ class GradeTrackerController extends ChangeNotifier {
   // Toggle Theme Mode
   void toggleTheme() {
     _themeMode = _themeMode == ThemeMode.light ? ThemeMode.dark : ThemeMode.light;
+    _saveTheme();
     notifyListeners();
   }
 
@@ -46,6 +81,7 @@ class GradeTrackerController extends ChangeNotifier {
       nameController.clear();
       markController.clear();
       
+      _saveData();
       notifyListeners();
     }
   }
@@ -54,6 +90,7 @@ class GradeTrackerController extends ChangeNotifier {
   void deleteSubject(int index) {
     if (index >= 0 && index < _subjects.length) {
       _subjects.removeAt(index);
+      _saveData();
       notifyListeners();
     }
   }

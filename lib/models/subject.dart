@@ -15,4 +15,18 @@ class Subject {
     if (_mark >= 50) return 'C';
     return 'F';
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'name': name,
+      'mark': _mark,
+    };
+  }
+
+  factory Subject.fromJson(Map<String, dynamic> json) {
+    return Subject(
+      name: json['name'] as String,
+      mark: json['mark'] as int,
+    );
+  }
 }
