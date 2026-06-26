@@ -25,7 +25,7 @@ class AddSubjectScreen extends StatelessWidget {
                 gradient: LinearGradient(
                   colors: [
                     theme.colorScheme.primary,
-                    theme.colorScheme.secondary.withOpacity(0.85),
+                    theme.colorScheme.secondary.withValues(alpha: 0.85),
                   ],
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
@@ -33,7 +33,7 @@ class AddSubjectScreen extends StatelessWidget {
                 borderRadius: BorderRadius.circular(24),
                 boxShadow: [
                   BoxShadow(
-                    color: theme.colorScheme.primary.withOpacity(0.2),
+                    color: theme.colorScheme.primary.withValues(alpha: 0.2),
                     blurRadius: 15,
                     offset: const Offset(0, 8),
                   ),
@@ -66,7 +66,7 @@ class AddSubjectScreen extends StatelessWidget {
                   Text(
                     'Track your marks, instantly view grades, and monitor overall academic performance.',
                     style: theme.textTheme.bodyMedium?.copyWith(
-                      color: theme.colorScheme.onPrimary.withOpacity(0.85),
+                      color: theme.colorScheme.onPrimary.withValues(alpha: 0.85),
                       height: 1.4,
                     ),
                   ),
@@ -92,7 +92,7 @@ class AddSubjectScreen extends StatelessWidget {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20),
                 side: BorderSide(
-                  color: theme.colorScheme.outline.withOpacity(0.5),
+                  color: theme.colorScheme.outline.withValues(alpha: 0.5),
                   width: 1.5,
                 ),
               ),

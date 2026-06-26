@@ -21,7 +21,7 @@ class SummaryScreen extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.all(28),
                 decoration: BoxDecoration(
-                  color: theme.colorScheme.primary.withOpacity(0.1),
+                  color: theme.colorScheme.primary.withValues(alpha: 0.1),
                   shape: BoxShape.circle,
                 ),
                 child: Icon(
@@ -70,7 +70,7 @@ class SummaryScreen extends StatelessWidget {
               gradient: LinearGradient(
                 colors: [
                   theme.colorScheme.primary,
-                  theme.colorScheme.secondary.withOpacity(0.9),
+                  theme.colorScheme.secondary.withValues(alpha: 0.9),
                 ],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
@@ -78,7 +78,7 @@ class SummaryScreen extends StatelessWidget {
               borderRadius: BorderRadius.circular(28),
               boxShadow: [
                 BoxShadow(
-                  color: theme.colorScheme.primary.withOpacity(0.15),
+                  color: theme.colorScheme.primary.withValues(alpha: 0.15),
                   blurRadius: 20,
                   offset: const Offset(0, 8),
                 ),
@@ -89,7 +89,7 @@ class SummaryScreen extends StatelessWidget {
                 Text(
                   'OVERALL GRADE',
                   style: theme.textTheme.labelLarge?.copyWith(
-                    color: theme.colorScheme.onPrimary.withOpacity(0.8),
+                    color: theme.colorScheme.onPrimary.withValues(alpha: 0.8),
                     letterSpacing: 2,
                     fontWeight: FontWeight.w900,
                   ),
@@ -105,7 +105,7 @@ class SummaryScreen extends StatelessWidget {
                       child: CircularProgressIndicator(
                         value: passRatio,
                         strokeWidth: 8,
-                        backgroundColor: theme.colorScheme.onPrimary.withOpacity(0.15),
+                        backgroundColor: theme.colorScheme.onPrimary.withValues(alpha: 0.15),
                         valueColor: AlwaysStoppedAnimation<Color>(
                           theme.colorScheme.onPrimary,
                         ),
@@ -125,7 +125,7 @@ class SummaryScreen extends StatelessWidget {
                         Text(
                           '${average.toStringAsFixed(1)}%',
                           style: theme.textTheme.titleMedium?.copyWith(
-                            color: theme.colorScheme.onPrimary.withOpacity(0.9),
+                            color: theme.colorScheme.onPrimary.withValues(alpha: 0.9),
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -135,9 +135,7 @@ class SummaryScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 20),
                 Text(
-                  overall == 'F'
-                      ? 'Academic Warning: Need to improve grades'
-                      : 'Great Job! Keep up the good performance',
+                  _getSummaryMessage(overall),
                   style: theme.textTheme.bodyMedium?.copyWith(
                     color: theme.colorScheme.onPrimary,
                     fontWeight: FontWeight.w600,
@@ -173,7 +171,7 @@ class SummaryScreen extends StatelessWidget {
                         Container(
                           padding: const EdgeInsets.all(8),
                           decoration: BoxDecoration(
-                            color: theme.colorScheme.primary.withOpacity(0.1),
+                            color: theme.colorScheme.primary.withValues(alpha: 0.1),
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: Icon(
@@ -209,7 +207,7 @@ class SummaryScreen extends StatelessWidget {
                         Container(
                           padding: const EdgeInsets.all(8),
                           decoration: BoxDecoration(
-                            color: theme.colorScheme.secondary.withOpacity(0.1),
+                            color: theme.colorScheme.secondary.withValues(alpha: 0.1),
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: Icon(
@@ -269,7 +267,7 @@ class SummaryScreen extends StatelessWidget {
                     child: LinearProgressIndicator(
                       value: passRatio,
                       minHeight: 12,
-                      backgroundColor: theme.colorScheme.error.withOpacity(0.15),
+                      backgroundColor: theme.colorScheme.error.withValues(alpha: 0.15),
                       valueColor: AlwaysStoppedAnimation<Color>(
                         theme.colorScheme.secondary,
                       ),
@@ -354,7 +352,7 @@ class SummaryScreen extends StatelessWidget {
                   ),
                   backgroundColor: theme.colorScheme.surface,
                   side: BorderSide(
-                    color: theme.colorScheme.outline.withOpacity(0.5),
+                    color: theme.colorScheme.outline.withValues(alpha: 0.5),
                   ),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
@@ -366,5 +364,20 @@ class SummaryScreen extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  String _getSummaryMessage(String grade) {
+    switch (grade) {
+      case 'A':
+        return 'Outstanding! Exceptional academic performance';
+      case 'B':
+        return 'Great Job! Keep up the good performance';
+      case 'C':
+        return 'Good, but there is room for improvement';
+      case 'F':
+        return 'Academic Warning: Need to improve grades';
+      default:
+        return 'Add some subjects to see your summary';
+    }
   }
 }

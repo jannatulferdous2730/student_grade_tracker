@@ -4,8 +4,8 @@ class Subject {
 
   Subject({
     required this.name,
-    required int mark,
-  }) : _mark = mark;
+    required this._mark,
+  });
 
   int get mark => _mark;
 
