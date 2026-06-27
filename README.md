@@ -4,6 +4,10 @@ A Flutter application designed for students to track their academic subjects and
 
 ---
 
+![screenshot_1](assets/images/ss_1.png)
+![screenshot_2](assets/images/ss_2.png)
+
+
 ## 🎨 Theme Customization & UI Design
 
 The app incorporates a custom **Midnight Navy Slate & Sunset Coral-Pink** theme:
